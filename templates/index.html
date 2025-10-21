@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Пекарня "Сладкая Жизнь"</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Telegram WebApp SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="#home" class="logo">🥐 Сладкая Жизнь</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active" data-page="home">Главная</a></li>
+                <li><a href="#menu" class="nav-link" data-page="menu">Меню</a></li>
+                <li><a href="#about" class="nav-link" data-page="about">О нас</a></li>
+                <li><a href="#delivery" class="nav-link" data-page="delivery">Доставка</a></li>
+                <li><a href="#contacts" class="nav-link" data-page="contacts">Контакты</a></li>
+            </ul>
+            <button class="hamburger" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="page-section active">
+            <div class="banner-content">
+                <h1>Свежая выпечка каждый день</h1>
+                <p>Наслаждайтесь вкусом настоящей ручной работы</p>
+                <button class="btn" data-navigate="menu">
+                    <span>Посмотреть меню</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="page-section">
+            <div class="container">
+                <h2>Наше Меню</h2>
+                <div class="menu-grid" id="menu-grid">
+                    <!-- Products will be inserted here via JS -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="page-section">
+            <div class="container info-page">
+                <h2>О нашей пекарне</h2>
+                <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Интерьер пекарни" loading="lazy">
+                <p><strong>"Сладкая Жизнь"</strong> — это не просто пекарня, это место, где рождается магия. Мы верим, что качественная выпечка способна сделать любой день лучше.</p>
+                <p>Каждое утро наши пекари начинают с замеса теста, используя только лучшие ингредиенты: фермерское масло, натуральные сливки, свежие ягоды и качественную муку.</p>
+            </div>
+        </section>
+        
+        <!-- Delivery Section -->
+        <section id="delivery" class="page-section">
+            <div class="container info-page">
+                <h2>Условия доставки</h2>
+                <div class="delivery-cards">
+                    <div class="info-card">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Зона доставки</h3>
+                        <p>Доставляем по всему городу. Уточните возможность доставки в ваш район.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-ruble-sign"></i>
+                        <h3>Стоимость</h3>
+                        <p>250 руб. При заказе от 1500 руб. — бесплатно!</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Время доставки</h3>
+                        <p>Ежедневно с 9:00 до 21:00. Среднее время: 60-90 минут.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-store"></i>
+                        <h3>Самовывоз</h3>
+                        <p>Скидка 10%! Адрес: ул. Вкусная, д. 15</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacts Section -->
+        <section id="contacts" class="page-section">
+            <div class="container info-page">
+                <h2>Свяжитесь с нами</h2>
+                <ul class="contact-methods">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>г. ВашГород, ул. Вкусная, д. 15</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                    </li>
+                    <li>
+                        <i class="fab fa-telegram-plane"></i>
+                        <a href="https://t.me/your_telegram_contact" target="_blank">@your_telegram_contact</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Пн-Вс, 08:00 - 21:00</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Admin FAB (shown only for admin via JS) -->
+    <button class="admin-fab" id="admin-fab" style="display: none;" aria-label="Admin">
+        <i class="fas fa-tools"></i>
+    </button>
+
+    <!-- Admin Modal -->
+    <div class="modal-overlay" id="admin-modal-overlay">
+        <div class="modal" id="admin-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-cog"></i> Управление товарами</h2>
+                <button class="close-modal-btn" id="close-admin-btn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="admin-form">
+                    <input type="hidden" id="admin-product-id">
+                    <div class="form-group">
+                        <label for="admin-title"><i class="fas fa-tag"></i> Название</label>
+                        <input type="text" id="admin-title" required placeholder="Название товара">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-description"><i class="fas fa-align-left"></i> Описание</label>
+                        <textarea id="admin-description" placeholder="Описание"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-price"><i class="fas fa-ruble-sign"></i> Цена</label>
+                        <input type="number" id="admin-price" required min="0" step="0.01" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-image"><i class="fas fa-image"></i> Изображение (URL)</label>
+                        <input type="url" id="admin-image" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-image-file"><i class="fas fa-file-upload"></i> Загрузить изображение</label>
+                        <input type="file" id="admin-image-file" accept="image/*">
+                        <small class="hint">Можно указать URL или загрузить файл</small>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-eye"></i> Предпросмотр</label>
+                        <img id="admin-image-preview" alt="Предпросмотр" style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color); display: none;" />
+                    </div>
+                    <div style="display:flex; gap:12px;">
+                        <button type="submit" class="btn" id="admin-save-btn">
+                            <span>Сохранить</span>
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button type="button" class="btn" id="admin-new-btn">
+                            <span>Новый</span>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart FAB -->
+    <div class="cart-fab" id="cart-fab">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-counter" id="cart-counter">0</span>
+        <span class="cart-total-price" id="cart-fab-total">0 ₽</span>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cart-modal-overlay">
+        <div class="modal" id="cart-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Ваша корзина</h2>
+                <button class="close-modal-btn" id="close-cart-btn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="cart-items-container">
+                <div class="empty-cart-message">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>Ваша корзина пуста</p>
+                </div>
+            </div>
+            <div class="modal-footer" id="cart-footer" style="display: none;">
+                <div class="cart-summary">
+                    <span>Итого:</span>
+                    <span id="cart-total">0 ₽</span>
+                </div>
+                <button class="btn checkout-btn" id="checkout-btn">
+                    Оформить заказ
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Order Form Modal -->
+    <div class="modal-overlay" id="order-form-modal-overlay">
+        <div class="modal" id="order-form-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-receipt"></i> Оформление заказа</h2>
+                <button class="close-modal-btn" id="close-order-form-btn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="order-form">
+                    <div class="form-group">
+                        <label for="name">
+                            <i class="fas fa-user"></i>
+                            Имя
+                        </label>
+                        <input type="text" id="name" required placeholder="Как к вам обращаться?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">
+                            <i class="fas fa-phone"></i>
+                            Телефон
+                        </label>
+                        <input type="tel" id="phone" required placeholder="+7 (999) 123-45-67">
+                    </div>
+                    
+                    <div class="form-group" id="address-group">
+                        <label for="address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Адрес доставки
+                        </label>
+                        <input type="text" id="address" required placeholder="Улица, дом, квартира">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-truck"></i>
+                            Способ получения
+                        </label>
+                        <div class="toggle-switch-container">
+                            <div class="toggle-switch-option active" data-delivery="delivery">
+                                <i class="fas fa-shipping-fast"></i>
+                                Доставка
+                            </div>
+                            <div class="toggle-switch-option" data-delivery="pickup">
+                                <i class="fas fa-store"></i>
+                                Самовывоз
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-credit-card"></i>
+                            Способ оплаты
+                        </label>
+                        <div class="toggle-switch-container">
+                            <div class="toggle-switch-option active" data-payment="cash">
+                                <i class="fas fa-money-bill-wave"></i>
+                                Наличными
+                            </div>
+                            <div class="toggle-switch-option" data-payment="online">
+                                <i class="fas fa-credit-card"></i>
+                                Онлайн
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comment">
+                            <i class="fas fa-comment"></i>
+                            Комментарий к заказу
+                        </label>
+                        <textarea id="comment" placeholder="Ваши пожелания (необязательно)"></textarea>
+                    </div>
+
+                    <div id="payment-info" class="payment-info">
+                        <i class="fas fa-info-circle"></i>
+                        Оплата наличными при получении
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Thank You Modal -->
+    <div class="modal-overlay" id="thank-you-modal-overlay">
+        <div class="modal" id="thank-you-modal">
+            <div class="modal-body thank-you-content">
+                <div class="success-animation">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Спасибо за заказ!</h2>
+                <p>Наш менеджер скоро свяжется с вами для подтверждения.</p>
+                <button class="btn" id="close-app-btn">
+                    Закрыть приложение
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
