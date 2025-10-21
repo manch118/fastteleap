@@ -7,7 +7,7 @@
 Полнофункциональное веб-приложение (Telegram Mini App) для небольшой пекарни, позволяющее клиентам просматривать меню, делать заказы и оплачивать их онлайн, а администратору — управлять товарами и получать уведомления о новых заказах.
 
 <p align="center">
-  <img src="https://i.imgur.com/aBcDefG.png" alt="Пример интерфейса приложения" width="600"/>
+  <img src="https://st3.depositphotos.com/1027198/18261/i/1600/depositphotos_182614816-stock-photo-colorful-delicious-glazed-donuts-close.jpg" alt="Пример интерфейса приложения" width="600"/>
 </p>
 
 ---
