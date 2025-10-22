@@ -17,31 +17,20 @@ sys.path.insert(0, str(project_root))
 
 
 def check_env_file():
-    """Проверяет наличие и корректность .env файла"""
-    env_path = Path(".env")
-    
-    if not env_path.exists():
-        print("❌ Файл .env не найден!")
-        print("📋 Создайте файл .env на основе env_example.txt:")
-        print("   cp env_example.txt .env")
-        print("   Затем заполните переменные BOT_TOKEN и ADMIN_USER_ID")
+    """Проверяет наличие переменных окружения (локально или в Render)"""
+    # Проверяем, заданы ли переменные окружения
+    bot_token = os.getenv("BOT_TOKEN")
+    admin_user_id = os.getenv("ADMIN_USER_ID")
+
+    if not bot_token:
+        print("❌ BOT_TOKEN не найден в переменных окружения!")
         return False
-    
-    # Проверяем содержимое .env
-    with open(env_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-        
-    if "your_telegram_bot_token_here" in content:
-        print("❌ BOT_TOKEN не настроен в .env файле!")
-        print("📋 Получите токен у @BotFather и укажите его в .env")
+
+    if not admin_user_id:
+        print("❌ ADMIN_USER_ID не найден в переменных окружения!")
         return False
-        
-    if "123456789" in content:
-        print("❌ ADMIN_USER_ID не настроен в .env файле!")
-        print("📋 Получите ваш ID у @userinfobot и укажите его в .env")
-        return False
-    
-    print("OK: Файл .env настроен корректно")
+
+    print("OK: Переменные окружения найдены")
     return True
 
 def start_fastapi_server():
